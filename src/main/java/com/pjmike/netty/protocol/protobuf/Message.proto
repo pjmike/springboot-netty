@@ -1,0 +1,16 @@
+
+syntax = "proto3"; //protobuf语法有 proto2和proto3两种，这里指定 proto3
+
+option java_package = "com.pjmike.netty.protocol.protobuf";
+option java_outer_classname = "MessageBase";
+
+message Message {
+    string requestId = 1;
+    CommandType cmd = 2;
+    string content = 3;
+    enum CommandType {
+        NORMAL = 0; //常规业务消息
+        HEARTBEAT_REQUEST = 1; //客户端心跳消息
+        HEARTBEAT_RESPONSE = 2; //服务端心跳消息
+    }
+}
