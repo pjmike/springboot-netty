@@ -1,28 +1,15 @@
 /target/
-!.mvn/wrapper/maven-wrapper.jar
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+mvnw
+mvnw.cmd
+/.mvn
 
-### IntelliJ IDEA ###
 .idea
+/.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/build/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
 
 # Compiled class file
 *.class
@@ -45,5 +32,3 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
