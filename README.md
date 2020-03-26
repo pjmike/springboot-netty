@@ -343,10 +343,14 @@ ChannelFuture添加一个监听器，如果客户端连接服务端失败，调�
 
 第二种情况是运行过程中 服务端突然挂掉了，这种情况我们在处理数据读写的Handler中实现，代码如下：
 ```java
+@Component
 @Slf4j
 public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
+    private final NettyClient nettyClient;
     @Autowired
-    private NettyClient nettyClient;
+    public HeartbeatHandler(NettyClient nettyClient) {
+        this.nettyClient = nettyClient;
+    }
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {

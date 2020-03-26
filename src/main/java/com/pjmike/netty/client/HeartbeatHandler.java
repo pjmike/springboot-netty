@@ -9,6 +9,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -17,10 +18,15 @@ import java.util.concurrent.TimeUnit;
  * @author pjmike
  * @create 2018-10-25 17:15
  */
+@Component
 @Slf4j
 public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
+    private final NettyClient nettyClient;
     @Autowired
-    private NettyClient nettyClient;
+    public HeartbeatHandler(NettyClient nettyClient) {
+        this.nettyClient = nettyClient;
+    }
+
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
