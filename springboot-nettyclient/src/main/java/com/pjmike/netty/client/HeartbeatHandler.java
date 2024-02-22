@@ -32,7 +32,7 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
             if (idleStateEvent.state() == IdleState.WRITER_IDLE) {
-                log.info("已经10s没有发送消息给服务端");
+                log.info("已经10s没有发送消息给服务端,发送心跳");
                 //向服务端送心跳包
                 MessageBase.Message heartbeat = new MessageBase.Message().toBuilder().setCmd(MessageBase.Message.CommandType.HEARTBEAT_REQUEST)
                         .setRequestId(UUID.randomUUID().toString())

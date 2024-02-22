@@ -1,7 +1,13 @@
 ## 前言
 这一篇文章主要介绍如何用Springboot 整合 Netty,由于本人尚处于学习Netty的过程中，并没有将Netty 运用到实际生产项目的经验，这里也是在网上搜寻了一些Netty例子学习后总结来的，借鉴了他人的写法和经验。如有重复部分，还请见谅。
 
+```
+dev分支在原基础上拆分了服务端和客户端，增加了dockerfile便于封装测试
 
+docker network create net
+docker run -d -p 9000:9000 --name netty-server --network net  netty-server:v1
+docker run -d -p 8000:8000 --name netty-client --network net --env NETTY_HOST=netty-server netty:v1
+```
 
 关于SpringBoot 如何整合使用 Netty ,我将分为以下几步进行分析与讨论：
 - 构建Netty 服务端

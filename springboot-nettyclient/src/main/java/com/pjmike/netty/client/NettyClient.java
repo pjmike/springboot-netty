@@ -33,6 +33,10 @@ public class NettyClient  {
     public void sendMsg(MessageBase.Message message) {
         socketChannel.writeAndFlush(message);
     }
+    public void sendMsgAndRes(MessageBase.Message message) {
+        socketChannel.writeAndFlush(message);
+        return;
+    }
 
     @PostConstruct
     public void start()  {

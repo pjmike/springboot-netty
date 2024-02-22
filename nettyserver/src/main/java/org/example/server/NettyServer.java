@@ -1,4 +1,4 @@
-package com.pjmike.netty.server;
+package org.example.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -6,11 +6,9 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -20,7 +18,6 @@ import java.net.InetSocketAddress;
  * @author pjmike
  * @create 2018-10-24 15:13
  */
-@Component
 @Slf4j
 public class NettyServer {
     /**
@@ -31,8 +28,7 @@ public class NettyServer {
      * work 线程组用于数据处理
      */
     private EventLoopGroup work = new NioEventLoopGroup();
-    @Value("${netty.port}")
-    private Integer port;
+    private Integer port = 9000;
     /**
      * 启动Netty Server
      *
@@ -59,7 +55,7 @@ public class NettyServer {
                 .childHandler(new NettyServerHandlerInitializer());
         ChannelFuture future = bootstrap.bind().sync();
         if (future.isSuccess()) {
-            log.info("启动 Netty Server");
+            System.out.println("启动 Netty Server");
         }
     }
 
@@ -67,6 +63,6 @@ public class NettyServer {
     public void destory() throws InterruptedException {
         boss.shutdownGracefully().sync();
         work.shutdownGracefully().sync();
-        log.info("关闭Netty");
+        System.out.println("关闭Netty");
     }
 }

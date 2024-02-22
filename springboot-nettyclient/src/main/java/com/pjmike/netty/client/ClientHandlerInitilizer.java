@@ -23,7 +23,7 @@ public class ClientHandlerInitilizer extends ChannelInitializer<Channel> {
                 .addLast(new ProtobufDecoder(MessageBase.Message.getDefaultInstance()))
                 .addLast(new ProtobufVarint32LengthFieldPrepender())
                 .addLast(new ProtobufEncoder())
-                .addLast(new HeartbeatHandler())
+                .addLast(new HeartbeatHandler(new NettyClient()))
                 .addLast(new NettyClientHandler());
     }
 }
